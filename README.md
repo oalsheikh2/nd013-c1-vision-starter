@@ -13,15 +13,15 @@ For this project, we will be using data from the [Waymo Open dataset](https://wa
 The data you will use for training, validation and testing is organized as follow:
 ```
 /home/workspace/data/waymo
-    - training_and_validation - contains 97 files to train and validate your models
+	- training_and_validation - contains 97 files to train and validate your models
     - train: contain the train data (empty to start)
     - val: contain the val data (empty to start)
     - test - contains 3 files to test your model and create inference videos
 ```
-
 The `training_and_validation` folder contains file that have been downsampled: we have selected one every 10 frames from 10 fps videos. The `testing` folder contains frames from the 10 fps video without downsampling.
-
+```
 You will split this `training_and_validation` data into `train`, and `val` sets by completing and executing the `create_splits.py` file.
+
 
 ### Experiments
 The experiments folder will be organized as follow:
@@ -138,23 +138,26 @@ Finally, you can create a video of your model's inferences for any tf record fil
 python inference_video.py --labelmap_path label_map.pbtxt --model_path experiments/reference/exported/saved_model --tf_record_path /data/waymo/testing/segment-12200383401366682847_2552_140_2572_140_with_camera_labels.tfrecord --config_path experiments/reference/pipeline_new.config --output_path animation.gif
 ```
 
-## Submission Template
+## Object Detection in an Urban Environment
 
 ### Project overview
-This section should contain a brief description of the project and what we are trying to achieve. Why is object detection such an important component of self driving car systems?
+The main objective of this project is to conduct a training and evaluation process, to do so the images has to be combined with its respective bounding boxes data from the tf records to be visualized and analyzed for the next steps. 
 
 ### Set up
-This section should contain a brief description of the steps to follow to run the code for this repository.
+In my case, I was using the virtual desktop provided by Udacity, therefore, the GPU was setup on the environment. I started with launching the Jupyter Notebook from the Terminator window. Terminator was also used to run all other functions in this repository.
 
 ### Dataset
 #### Dataset analysis
-This section should contain a quantitative and qualitative description of the dataset. It should include images, charts and other visualizations.
+As explained multiple times in the course, we should become one with the data we have, which means that we need to know the quality and the quantity of what we have. Therefore, the `Exploratory Data Analysis.ipynb` Notebook was used to implement functions from dependencies that will help in vizualizing the data we have, such as `display_instances(batch)`
+The following are some random images from the dataset:
+
+
 #### Cross validation
-This section should detail the cross validation strategy and justify your approach.
+Prior to cross validation, the quantitative measures of the dataset was analyzed to study the class distribution across the tf records, keeping in mind that we have 3 classes. After a careful study it was determined that the data should be split by running the `create_splits.py` in a ratio of 70%, 20%, and 10% for training, validation, and testing respectfully. This ratio was chosen to be optimal due to the diverse similarity across the data, such as most having cars and roads, with the variation being the brightness and color.
 
 ### Training
 #### Reference experiment
-This section should detail the results of the reference experiment. It should includes training metrics and a detailed explanation of the algorithm's performances.
+Data augmentation decreased the loss values, but I also chose to use Adam optimizer with the cosine decay function to prevent losses from getting stuck at the local minmum. I also adjusted the learning rate and the regularizer's weight decay value
 
 #### Improve on the reference
 This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.

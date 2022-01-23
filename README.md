@@ -39,7 +39,7 @@ Once the training is finished, launch the evaluation process:
 ```
 python experiments/model_main_tf2.py --model_dir=experiments/reference/improved4/ --pipeline_config_path=experiments/reference/improved4/pipeline_improved4.config --checkpoint_dir=experiments/reference/improved4/
 ```
-![](https://github.com/oalsheikh2/nd013-c1-vision-starter/blob/main/Screenshot_2022-01-23TensorBoard6.png)
+![](https://github.com/oalsheikh2/nd013-c1-vision-starter/blob/main/Screenshot_2022-01-23TensorBoard.png)
 
 
 #### Inference
